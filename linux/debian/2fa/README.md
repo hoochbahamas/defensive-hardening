@@ -2,38 +2,35 @@
 
 **Rank 2: Authentication Security**
 
-This section documents the implementation of **Google Authenticator (TOTP)** combined with SSH key authentication on Debian 13.
+This section documents the implementation of **Google Authenticator (TOTP)** combined with SSH key authentication.
 
 ## Implemented Controls
 
-- Installed `libpam-google-authenticator` package
-- Generated TOTP secret key and QR code for the user
-- Configured PAM (`/etc/pam.d/sshd`) to enforce 2FA
-- Updated `sshd_config` to support `ChallengeResponseAuthentication`
-- Used `AuthenticationMethods publickey,keyboard-interactive` to enforce clean Key + 2FA flow
+- Installed `libpam-google-authenticator`
+- Generated TOTP secret key and QR code
+- Configured PAM to enforce 2FA after SSH key validation
+- Updated `sshd_config` with `AuthenticationMethods publickey,keyboard-interactive`
 - Disabled password authentication completely
+
+## Key Files
+
+- `pam-sshd` → PAM configuration for SSH (most important for 2FA)
+- `sshd_config` → Main SSH daemon configuration
 
 ## Security Benefit
 
-This setup ensures that even if an attacker obtains the SSH private key, they still cannot log in without the 6-digit time-based code from the authenticator app.
-
-This creates true two-factor authentication for remote SSH access.
-
-## Account Label Used
-- `user@hostname`
+Even if the SSH private key is compromised, login is still protected by a second factor (TOTP).
 
 ## Final Login Flow
 
-1. SSH private key is validated
-2. User is prompted for Verification code (TOTP)
-3. Enter 6-digit code from authenticator app
-4. Successful login (no password prompt)
+1. SSH key authentication
+2. Prompt for Verification code (6-digit TOTP)
+3. Successful login (no password prompt)
 
 ## Status
 
 **Completed and Tested**
 
-## Testing Command (Example)
+---
 
-```bash
-ssh -p 50022 user@ip-address
+**Part of the Defensive Hardening Portfolio**
