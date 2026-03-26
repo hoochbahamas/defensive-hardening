@@ -1,8 +1,10 @@
-# ================================================
+# =====================================================
 # Defensive Hardening - SSH Configuration
-# Debian 13 | Port 50022
-# ================================================
+# Debian 13 | Portfolio Project
+# Rank 1: SSH Service Hardening
+# =====================================================
 
+# Port Configuration
 Port 50022
 
 # Authentication Security
@@ -13,20 +15,20 @@ KbdInteractiveAuthentication yes
 UsePAM yes
 ChallengeResponseAuthentication yes
 
-# Brute Force Protection
+# Brute Force & Session Protection
 MaxAuthTries 3
 MaxSessions 2
 LoginGraceTime 30
 
 # User Restriction
-AllowUsers user
+AllowUsers rober
 
-# Session Management
+# Session Management & Keepalive
 ClientAliveInterval 300
 ClientAliveCountMax 2
 TCPKeepAlive yes
 
-# Logging (Critical for Fail2Ban and SIEM)
+# Logging (Important for Fail2Ban and auditing)
 LogLevel VERBOSE
 
 # Additional Security Best Practices
