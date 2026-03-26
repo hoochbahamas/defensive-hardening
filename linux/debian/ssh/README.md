@@ -36,4 +36,4 @@ Changing the SSH port and disabling password login significantly reduces the att
 ## Testing Command
 
 ```bash
-ssh -p 50022 rober@192.168.0.16
+ssh -p 50022 user@ip-address
