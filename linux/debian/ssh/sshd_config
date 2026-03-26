@@ -1,0 +1,37 @@
+# ================================================
+# Defensive Hardening - SSH Configuration
+# Debian 13 | Port 50022
+# ================================================
+
+Port 50022
+
+# Authentication Security
+PermitRootLogin no
+PasswordAuthentication no
+PubkeyAuthentication yes
+KbdInteractiveAuthentication yes
+UsePAM yes
+ChallengeResponseAuthentication yes
+
+# Brute Force Protection
+MaxAuthTries 3
+MaxSessions 2
+LoginGraceTime 30
+
+# User Restriction
+AllowUsers user
+
+# Session Management
+ClientAliveInterval 300
+ClientAliveCountMax 2
+TCPKeepAlive yes
+
+# Logging (Critical for Fail2Ban and SIEM)
+LogLevel VERBOSE
+
+# Additional Security Best Practices
+PermitEmptyPasswords no
+StrictModes yes
+IgnoreRhosts yes
+HostbasedAuthentication no
+PermitTunnel no
