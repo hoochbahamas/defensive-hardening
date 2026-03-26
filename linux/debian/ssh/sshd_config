@@ -1,13 +1,11 @@
 # =====================================================
-# Defensive Hardening - SSH Configuration
-# Debian 13 | Portfolio Project
-# Rank 1: SSH Service Hardening
+# Rank 1: SSH Service Hardening + Rank 2: 2FA
+# Defensive Hardening Portfolio - Debian 13
 # =====================================================
 
-# Port Configuration
 Port 50022
 
-# Authentication Security
+# Authentication Settings
 PermitRootLogin no
 PasswordAuthentication no
 PubkeyAuthentication yes
@@ -15,25 +13,27 @@ KbdInteractiveAuthentication yes
 UsePAM yes
 ChallengeResponseAuthentication yes
 
-# Brute Force & Session Protection
+# Force SSH Key + 2FA only (Critical line)
+AuthenticationMethods publickey,keyboard-interactive
+
+# Brute Force Protection
 MaxAuthTries 3
 MaxSessions 2
 LoginGraceTime 30
 
 # User Restriction
-AllowUsers rober
+AllowUsers user
 
-# Session Management & Keepalive
+# Session Management
 ClientAliveInterval 300
 ClientAliveCountMax 2
 TCPKeepAlive yes
 
-# Logging (Important for Fail2Ban and auditing)
+# Logging
 LogLevel VERBOSE
 
-# Additional Security Best Practices
+# Additional Security
 PermitEmptyPasswords no
 StrictModes yes
 IgnoreRhosts yes
 HostbasedAuthentication no
-PermitTunnel no
