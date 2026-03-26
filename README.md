@@ -1,47 +1,42 @@
-# defensive-hardening# Defensive Hardening
+# Defensive Hardening
 
-**Cyber Security Analyst Portfolio**  
-Focus: Defensive Security | Attack Surface Reduction | Blue Team Practices
+**Cyber Security Analyst Portfolio**
 
-This repository documents practical Linux server hardening techniques I implemented on Debian 13 to strengthen security posture, reduce risk, and improve detection capabilities.
+Practical defensive security hardening techniques implemented on Debian 13 Linux.
 
-## 🎯 Top 5 Hardening Controls Implemented
+This repository demonstrates my understanding of **attack surface reduction**, **defense-in-depth**, and **security posture improvement** on Linux systems.
 
-| # | Hardening Area                    | Status     | Key Techniques Used                     |
-|---|-----------------------------------|------------|-----------------------------------------|
-| 1 | SSH Access Hardening              | Completed  | Port change, Key Auth + 2FA, Rate limiting |
-| 2 | Fail2Ban Intrusion Prevention     | Completed  | Custom jails, intelligent banning       |
-| 3 | UFW Firewall Configuration        | Completed  | Default-deny policy, strict rules       |
-| 4 | System Auditing & Logging         | In Progress| auditd, verbose logging                 |
-| 5 | Security Auditing (Lynis)         | In Progress| CIS Benchmark style scanning            |
+## Top 5 Hardening Controls
 
-## 🛠️ Technologies Used
+| Rank | Control Area                        | Status      | Key Techniques Used                     |
+|------|-------------------------------------|-------------|-----------------------------------------|
+| 1    | SSH Access Hardening                | Completed   | Port 50022, Key Auth + 2FA, Rate limiting |
+| 2    | Fail2Ban Intrusion Prevention       | Completed   | Custom SSH jail, IP banning             |
+| 3    | UFW Firewall Hardening              | Completed   | Default-deny policy, strict rules       |
+| 4    | System Auditing & Logging           | In Progress | auditd, verbose SSH logging             |
+| 5    | Security Auditing (Lynis)           | Planned     | CIS Benchmark style scanning            |
+
+## Technologies Used
 - Debian 13
-- OpenSSH + PAM + Google Authenticator (2FA)
+- OpenSSH + PAM + Google Authenticator
 - Fail2Ban
 - UFW (Uncomplicated Firewall)
-- auditd + rsyslog
-- Lynis
+- auditd
 
-## 📂 Repository Structure
+## Repository Structure
+- `linux/debian/` – All Debian 13 hardening configurations
+- `docs/` – Methodology and lessons learned
+- `scripts/` – Automation scripts (coming soon)
 
-- `/ssh/`          → SSH hardening (port 50022, keys, 2FA)
-- `/fail2ban/`     → Intrusion prevention configuration
-- `/firewall/`     → UFW strict rules
-- `/auditing/`     → System logging and auditing
-- `/scanning/`     → Lynis security audits
-- `/scripts/`      → Automation scripts
-- `/docs/`         → Methodology and lessons learned
-
-## 🧠 Skills Demonstrated
+## Skills Demonstrated
 - Defense-in-Depth implementation
 - Least Privilege enforcement
-- Attack surface reduction
-- Security monitoring and logging
-- Technical documentation for security operations
+- Multi-factor Authentication
+- Intrusion Prevention
+- Security Monitoring & Logging
+- Technical Documentation
 
 ---
 
-*This repository serves as a living document of my defensive security journey. Future expansions will include Windows hardening, macOS hardening, and basic SIEM/SOAR concepts.*
-
+*Actively maintained as part of my journey to become a Cyber Security Analyst.*
 Last updated: March 2026
