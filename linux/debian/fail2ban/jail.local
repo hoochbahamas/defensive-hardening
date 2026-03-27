@@ -1,0 +1,15 @@
+# Fail2Ban Configuration - Rank 3
+# Defensive Hardening Portfolio
+
+[sshd]
+enabled = true
+port = 50022
+filter = sshd
+logpath = /var/log/auth.log
+maxretry = 4
+findtime = 10m
+bantime = 86400          # 24 hours
+ignoreip = 127.0.0.1 ::1 192.168.0.0/24   # Whitelist your local network
+
+# Optional: More aggressive settings for public exposure
+# bantime = 604800       # 7 days for repeat offenders
