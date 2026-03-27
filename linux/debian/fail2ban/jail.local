@@ -1,15 +1,18 @@
-# Fail2Ban Configuration - Rank 3
-# Defensive Hardening Portfolio
+
+### 2. `linux/debian/fail2ban/jail.local`
+
+```ini
+# =====================================================
+# Rank 3: Fail2Ban SSH Jail Configuration
+# Defensive Hardening Portfolio - Debian 13
+# =====================================================
 
 [sshd]
 enabled = true
 port = 50022
+backend = systemd
 filter = sshd
-logpath = /var/log/auth.log
 maxretry = 4
 findtime = 10m
-bantime = 86400          # 24 hours
-ignoreip = 127.0.0.1 ::1 192.168.0.0/24   # Whitelist your local network
-
-# Optional: More aggressive settings for public exposure
-# bantime = 604800       # 7 days for repeat offenders
+bantime = 86400        # Ban for 24 hours
+ignoreip = 127.0.0.1 ::1 192.168.0.0/24   # Whitelist local network
