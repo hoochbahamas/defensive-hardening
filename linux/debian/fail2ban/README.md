@@ -2,33 +2,36 @@
 
 **Rank 3: Threat Detection & Response**
 
-Fail2Ban is an intrusion prevention system that monitors log files and automatically bans IP addresses that show malicious behavior (primarily brute-force attacks).
+Fail2Ban is an intrusion prevention system that monitors system logs (especially SSH authentication) and automatically bans IP addresses that exhibit malicious behavior, such as brute-force login attempts.
 
 ## Implemented Controls
 
-- Installed Fail2Ban
-- Configured custom SSH jail with aggressive settings
-- Set ban time to 24 hours (86400 seconds)
-- Whitelisted trusted IP ranges (e.g., local network)
-- Enabled logging for banned IPs
+- Installed and enabled Fail2Ban on Debian 13
+- Configured custom SSH jail for the hardened port (50022)
+- Set `maxretry = 4` failed attempts within 10 minutes
+- Set `bantime = 24 hours`
+- Used `backend = systemd` to properly read Debian 13 journal logs
+- Whitelisted local network range (`192.168.0.0/24`)
+- Successfully tested banning of attacking IPs
 
-## Why This Matters
+## Security Benefit
 
-While SSH hardening (Rank 1) and 2FA (Rank 2) make unauthorized login very difficult, Fail2Ban adds an **active defense layer** by automatically blocking attackers who attempt brute-force or other suspicious activity.
+Fail2Ban adds an **active defense layer** on top of SSH hardening and 2FA. While SSH + 2FA makes successful logins very difficult, Fail2Ban automatically blocks attackers who repeatedly try to guess credentials, reducing log noise and preventing resource exhaustion.
 
-This reduces log noise and prevents resource exhaustion from repeated attacks.
+## Key Configuration
 
-## Configuration Files
-
-- `jail.local` → Main jail configuration
-- (Future) Custom actions if needed
+- Jail file: `jail.local`
+- Filter: Uses improved custom filter for Debian 13 `sshd-session` logs
 
 ## Status
 
-**In Progress**
+**Completed and Tested**
 
-Current focus: Protecting the hardened SSH service on port 50022.
+- Fail2Ban successfully detects failed login attempts
+- Automatically bans offending IPs after threshold is reached
+- Tested with multiple invalid username attempts from another machine
 
----
+## Verification Command
 
-**Part of the Defensive Hardening Portfolio**
+```bash
+sudo fail2ban-client status sshd
