@@ -1,1 +1,29 @@
 
+#### 2. `linux/debian/auditing/audit.rules`
+
+```bash
+# =====================================================
+# Rank 4: auditd Rules - System Auditing & Logging
+# Defensive Hardening Portfolio - Debian 13
+# =====================================================
+
+# Monitor authentication and login events
+-w /var/log/auth.log -p wa -k auth
+
+# Monitor SSH configuration changes
+-w /etc/ssh/sshd_config -p wa -k ssh-config
+
+# Monitor user and group file changes
+-w /etc/passwd -p wa -k identity
+-w /etc/group -p wa -k identity
+-w /etc/shadow -p wa -k identity
+
+# Monitor sudoers changes
+-w /etc/sudoers -p wa -k sudoers
+-w /etc/sudoers.d -p wa -k sudoers
+
+# Monitor privilege escalation attempts
+-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k privilege-escalation
+
+# Monitor failed login attempts
+-a always,exit -F arch=b64 -S execve -k failed-login
