@@ -1,22 +1,28 @@
 ## Automated Malicious IP Blocking with AbuseIPDB + ipset
-Project: Defensive Hardening Lab
-Status: Completed & Running Daily
-Overview
-Implemented automated daily ingestion of high-confidence malicious IP addresses from AbuseIPDB, using ipset for efficient blocking instead of individual UFW rules.
-Key Features:
+# Rank: 3: Network & Threat Intelligence Hardening
+This section documents the implementation of daily automated blocking of malicious IP addresses using AbuseIPDB threat intelligence and ipset for high-performance enforcement.
 
-Daily cron job at 03:00 AM
-Pulls IPs with confidence score ≥ 70
-Uses separate ipsets for IPv4 and IPv6
-Automatically adds only new IPs (no duplicates)
-High performance even with 10,000+ IPs
-Integrated with iptables/ip6tables
+## Implemented Controls
 
-Technical Implementation:
+Daily cron job pulls high-confidence malicious IPs from AbuseIPDB (confidence ≥ 70)
+Uses ipset (hash:ip) for both IPv4 and IPv6 instead of individual UFW rules
+Automatically adds only new IPs each day (no duplicates)
+Links ipset to iptables/ip6tables for efficient blocking
+Maintains high performance even with 10,000+ IPs
 
-Script: /usr/local/bin/update-abuseipdb-ipset.sh
-Cron schedule: 0 3 * * *
-Log file: /var/log/abuseipdb-ipset.log
+## Key Files
 
-NIST SP 800-53 Rev. 5 Controls:
+/usr/local/bin/update-abuseipdb-ipset.sh → Main update script
+Cron job (0 3 * * *) → Runs daily at 3:00 AM
+/var/log/abuseipdb-ipset.log → Execution log
 
+# NIST SP 800-53 Rev. 5 Mapping
+
+SI-4(4) – Information System Monitoring | Inbound and Outbound Communications Traffic (Primary)
+SI-3 – Malicious Code Protection
+SC-7 – Boundary Protection
+
+# Security Benefit
+Converts real-time external threat intelligence into automated, low-overhead network blocking. Significantly reduces attack surface by preventing known malicious IPs from reaching the system.
+Current Status
+Completed and Running Daily
