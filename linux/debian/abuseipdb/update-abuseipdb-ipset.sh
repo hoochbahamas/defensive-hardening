@@ -1,4 +1,8 @@
 #!/bin/bash
+# =============================================
+# AbuseIPDB + ipset Daily Update Script
+# Author: Robert Baptist
+# =============================================
 
 API_KEY="API-KEY"
 BLACKLIST="/tmp/abuseipdb-blacklist.txt"
@@ -11,7 +15,7 @@ echo "[$(date)] Starting AbuseIPDB ipset update..."
 sudo ipset list ${IPSET_NAME}_v4 >/dev/null 2>&1 || sudo ipset create ${IPSET_NAME}_v4 hash:ip family inet
 sudo ipset list ${IPSET_NAME}_v6 >/dev/null 2>&1 || sudo ipset create ${IPSET_NAME}_v6 hash:ip family inet6
 
-# Download latest malicious IPs
+# Download blacklist
 curl -s -G https://api.abuseipdb.com/api/v2/blacklist \
   -d "confidenceMinimum=$CONFIDENCE" \
   -H "Key: $API_KEY" \
@@ -19,7 +23,7 @@ curl -s -G https://api.abuseipdb.com/api/v2/blacklist \
 
 echo "Downloaded $(wc -l < "$BLACKLIST") IPs (Confidence >= $CONFIDENCE)"
 
-# Add IPs to the correct ipset
+# Add to correct ipset
 while read -r ip; do
     if [[ $ip =~ : ]]; then
         sudo ipset add ${IPSET_NAME}_v6 "$ip" -exist 2>/dev/null
@@ -28,7 +32,7 @@ while read -r ip; do
     fi
 done < "$BLACKLIST"
 
-# Ensure firewall rules are linked
+# Link to firewall
 sudo iptables -I INPUT -m set --match-set ${IPSET_NAME}_v4 src -j DROP 2>/dev/null || true
 sudo ip6tables -I INPUT -m set --match-set ${IPSET_NAME}_v6 src -j DROP 2>/dev/null || true
 
