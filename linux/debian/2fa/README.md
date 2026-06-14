@@ -27,7 +27,7 @@ Even if the SSH private key is compromised, login is still protected by a second
 2. Prompt for Verification code (6-digit TOTP)
 3. Successful login (no password prompt)
 
-## NIST Standards
+## # NIST SP 800-53 Rev. 5 Mapping
 
 * IA-2(1) Identification and Authentication | Multi-factor Authentication,Primary control – Enforces MFA for SSH access
 * IA-2 Identification and Authentication (Organizational Users),Overall user identification and authentication
