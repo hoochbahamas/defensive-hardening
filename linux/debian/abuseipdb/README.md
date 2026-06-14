@@ -18,9 +18,10 @@ Cron job (0 3 * * *) → Runs daily at 3:00 AM
 
 # NIST SP 800-53 Rev. 5 Mapping
 
-SI-4(4) – Information System Monitoring | Inbound and Outbound Communications Traffic (Primary)
-SI-3 – Malicious Code Protection
-SC-7 – Boundary Protection
+* SI-4 Information System MonitoringCore monitoring of network traffic using external threat intelligence
+* SI-4(4) Information System Monitoring | Inbound and Outbound Communications TrafficPrimary control – real-time blocking of known malicious IPs
+* SI-3 Malicious Code ProtectionPrevents communication with known malicious sources
+* SC-7 Boundary ProtectionStrengthens network perimeter defense through automated blocking
 
 # Security Benefit
 Converts real-time external threat intelligence into automated, low-overhead network blocking. Significantly reduces attack surface by preventing known malicious IPs from reaching the system.
