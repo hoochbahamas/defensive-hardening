@@ -1,0 +1,4 @@
+crontab -e
+
+
+0 3 * * * /usr/local/bin/update-abuseipdb-ipset.sh >> /var/log/abuseipdb-ipset.log 2>&1
