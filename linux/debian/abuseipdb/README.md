@@ -17,3 +17,6 @@ Technical Implementation:
 Script: /usr/local/bin/update-abuseipdb-ipset.sh
 Cron schedule: 0 3 * * *
 Log file: /var/log/abuseipdb-ipset.log
+
+NIST SP 800-53 Rev. 5 Controls:
+
